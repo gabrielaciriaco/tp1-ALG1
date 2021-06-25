@@ -8,7 +8,7 @@ SRC_FOLDER = ./src/
 TMPOUT = .testresult
 
 MAIN = Main
-TARGET = TP1-ALG1
+TARGET = tp01
 SRC = $(wildcard $(SRC_FOLDER)*.cpp)
 OBJ = $(patsubst $(SRC_FOLDER)%.cpp, $(OBJ_FOLDER)%.o, $(SRC))
 
