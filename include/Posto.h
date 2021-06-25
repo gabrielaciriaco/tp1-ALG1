@@ -2,6 +2,7 @@
 #define Posto_H
 
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
@@ -11,14 +12,17 @@ private:
   int capacidadeDoPosto;
   int coordenadaX;
   int coordenadaY;
+  vector<int> pessoasAlocadas;
 
 public:
   Posto() {};
   Posto(int id,int capacidadeDoPosto, int coordenadaX, int coordenadaY);
-  void imprimePosto();
+  void imprimeSaida();
   int getCoordenadaX();
   int getCoordenadaY();
   int getId();
+  int getCapacidadeDoPosto();
+  void alocaPessoa(int idPessoa);
 };
 
 #endif

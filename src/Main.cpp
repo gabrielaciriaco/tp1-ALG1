@@ -3,8 +3,8 @@
 #include <iostream>
 #include <vector>
 
-#include "Pessoa.hpp"
-#include "Posto.hpp"
+#include "Pessoa.h"
+#include "Posto.h"
 
 using namespace std;
 
@@ -28,7 +28,7 @@ vector<Pessoa> lerInformacoesPessoas(int numeroDePessoas, vector<Posto>postos) {
   int coordenadaY;
   for (int i = 0; i < numeroDePessoas; i++) {
     cin >> idade >> coordenadaX >> coordenadaY;
-    pessoas.push_back(Pessoa(idade, coordenadaX, coordenadaY,postos));
+    pessoas.push_back(Pessoa(i,idade, coordenadaX, coordenadaY,postos));
   }
 
   return pessoas;
@@ -46,13 +46,22 @@ int main() {
   cin >> numeroDePessoas;
   pessoas = lerInformacoesPessoas(numeroDePessoas,postos);
 
-  for (int i = 0; i < numeroDePostos; i++) {
-    postos.at(i).imprimePosto();
+  sort(pessoas.begin(), pessoas.end());
+  
+  for(Pessoa pessoa:pessoas){
+    bool foiAdicionada = false;
+    for(tuple<double,int> distancia:pessoa.getDistancias()){
+      if(postos.at(get<1>(distancia)).getCapacidadeDoPosto()>0 && !foiAdicionada){
+        postos.at(get<1>(distancia)).alocaPessoa(pessoa.getId());
+        foiAdicionada=true;
+      }
+    }
+    if(!foiAdicionada){
+      break;
+    }
   }
 
-  sort(pessoas.begin(), pessoas.end());
-  cout<<"Pessoas ordenadas por idade"<<endl;
-  for (int i = 0; i < numeroDePessoas; i++) {
-    pessoas.at(i).imprimePessoa();
+  for(int i=0;i<numeroDePostos;i++){
+    postos.at(i).imprimeSaida();
   }
 }

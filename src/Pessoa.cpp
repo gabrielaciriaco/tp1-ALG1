@@ -1,10 +1,11 @@
 #include <iostream>
 #include <cmath>
 #include <algorithm>
-#include "Pessoa.hpp"
+#include "Pessoa.h"
 
 
-Pessoa::Pessoa(int idade, int coordenadaX, int coordenadaY, vector<Posto> postos){
+Pessoa::Pessoa(int id,int idade, int coordenadaX, int coordenadaY, vector<Posto> postos){
+    this->id =id;
     this->idade = idade;
     this->coordenadaX = coordenadaX;
     this->coordenadaY =  coordenadaY;
@@ -13,7 +14,7 @@ Pessoa::Pessoa(int idade, int coordenadaX, int coordenadaY, vector<Posto> postos
 
 bool operator< (const Pessoa &p1,const Pessoa &p2)
 {
-  return p1.idade > p2.idade;
+  return p1.idade > p2.idade || (p1.idade == p2.idade && p1.id<p2.id);
 }
 
 vector<tuple<double,int>> Pessoa::calculaDistanciasPostos(vector<Posto> postos){
@@ -36,4 +37,12 @@ void Pessoa::imprimePessoa(){
     cout<<get<0>(distancia)<< " ";
     cout<<get<1>(distancia)<<endl;
   }
+}
+
+vector<tuple<double,int>> Pessoa::getDistancias(){
+  return this->distancias;
+}
+
+int Pessoa::getId(){
+  return this->id;
 }

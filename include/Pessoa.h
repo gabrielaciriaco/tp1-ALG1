@@ -4,12 +4,13 @@
 #include <iostream>
 #include <tuple>
 #include <vector>
-#include "Posto.hpp"
+#include "Posto.h"
 
 using namespace std;
 
 class Pessoa {
 private:
+  int id;
   int idade;
   int coordenadaX;
   int coordenadaY;
@@ -18,9 +19,11 @@ private:
   vector<tuple<double,int>> calculaDistanciasPostos(vector<Posto> postos);
 public:
   Pessoa() {};
-  Pessoa(int idade, int coordenadaX, int coordenadaY, vector<Posto> postos);
+  Pessoa(int id,int idade, int coordenadaX, int coordenadaY, vector<Posto> postos);
   void imprimePessoa();
   friend bool operator< (const Pessoa &p1,const Pessoa &p2);
+  vector<tuple<double,int>> getDistancias();
+  int getId();
 };
 
 #endif
